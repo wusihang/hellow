@@ -183,12 +183,14 @@ void Spreadsheet::paste(){
     }
     for(int i=0;i<numRows;i++)
     {
-        QStringList columns = rows[i].split("\t");
-        for(int j=0;j<numColumns;j++){
-            int row = range.topRow()+i;
-            int column = range.leftColumn()+j;
-            if(row<ROW_COUNT&&column<COLUMN_COUNT&&!columns[j].isEmpty()){
-                setFormula(row,column,columns[j]);
+        if(!rows[i].isEmpty()){
+            QStringList columns = rows[i].split("\t");
+            for(int j=0;j<numColumns;j++){
+                int row = range.topRow()+i;
+                int column = range.leftColumn()+j;
+                if(row<ROW_COUNT&&column<COLUMN_COUNT&&!columns[j].isEmpty()){
+                    setFormula(row,column,columns[j]);
+                }
             }
         }
     }
