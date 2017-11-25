@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     Plotter plotter;
     plotter.setWindowTitle(QObject::tr("Jambi Plotter"));
-#if 0
+#if 1
     readFlightCurves(&plotter, ":/in1.txt");
 #else
     int numPoints = 100;
