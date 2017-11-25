@@ -7,6 +7,7 @@
 QT       += core gui
 QT       += uitools
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       +=designer
 
 TARGET = hellow
 TEMPLATE = app
@@ -29,7 +30,10 @@ SOURCES += main.cpp\
     sortdialog.cpp \
     mainwindow.cpp \
     spreadsheet.cpp \
-    cell.cpp
+    cell.cpp \
+    user-defined-component/hexspinbox.cpp \
+    user-defined-component/iconEditor/iconeditor.cpp \
+    user-defined-component/plotter/plotter.cpp
 
 HEADERS  += \
     finddialog.h \
@@ -37,11 +41,15 @@ HEADERS  += \
     sortdialog.h \
     mainwindow.h \
     spreadsheet.h \
-    cell.h
+    cell.h \
+    user-defined-component/hexspinbox.h \
+    user-defined-component/iconEditor/iconeditor.h \
+    user-defined-component/plotter/plotter.h
 
 FORMS    += \
     gotocelldialog.ui \
     sortdialog.ui
 
 RESOURCES += \
-    spreadsheet.qrc
+    spreadsheet.qrc \
+    res/plotter.qrc
