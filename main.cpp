@@ -1,5 +1,10 @@
 #include <QtWidgets>
 #include "user-defined-component/plotter/plotter.h"
+#include "user-defined-component/mdiEditor/editor.h"
+#include "user-defined-component/mdiEditor/mdiwindow.h"
+#include "user-defined-component/timeTicker/ticker.h"
+#include "user-defined-component/ovenTimer/oventimer.h"
+#include "mainwindow.h"
 
 void readFlightCurves(Plotter *plotter, const QString &fileName)
 {
@@ -38,7 +43,7 @@ void readFlightCurves(Plotter *plotter, const QString &fileName)
     plotter->setCurveData(5, data[5]);
 }
 
-int main(int argc, char *argv[])
+int startPlot(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     Plotter plotter;
@@ -65,4 +70,47 @@ int main(int argc, char *argv[])
 #endif
     plotter.show();
     return app.exec();
+}
+
+
+int editor(int argc,char *argv[])
+{
+    QApplication app(argc, argv);
+    Editor *editor = new Editor;
+    editor->show();
+    return app.exec();
+}
+
+int sheet(int argc,char *argv[])
+{
+    QApplication app(argc, argv);
+    MainWindow *window = new MainWindow;
+    window->show();
+    return app.exec();
+}
+
+int mdiWindow(int argc,char *argv[])
+{
+    QApplication app(argc, argv);
+    MdiWindow window;
+    window.show();
+    return app.exec();
+}
+
+int timeTicker(int argc, char* argv[]){
+    QApplication app(argc, argv);
+    Ticker ticker;
+    return app.exec();
+}
+
+int ovenTimer(int argc, char* argv[]){
+    QApplication app(argc, argv);
+    OvenTimer timer;
+    timer.show();
+    return app.exec();
+}
+
+int main(int argc, char *argv[])
+{
+    return ovenTimer(argc,argv);
 }

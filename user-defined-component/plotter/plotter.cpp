@@ -82,7 +82,7 @@ QSize Plotter::sizeHint() const
     return QSize(12*Margin,8*Margin);
 }
 
-//这里对参数加上注释的原因是函数内部为使用到该变量，编译时会有unused警告，加上注释后将不会有警告
+//这里对参数加上注释的原因是函数内部未使用到该变量，编译时会有unused警告，加上注释后将不会有警告
 void Plotter::paintEvent(QPaintEvent */* event */)
 {
     QStylePainter painter(this);

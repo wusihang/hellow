@@ -33,7 +33,11 @@ SOURCES += main.cpp\
     cell.cpp \
     user-defined-component/hexspinbox.cpp \
     user-defined-component/iconEditor/iconeditor.cpp \
-    user-defined-component/plotter/plotter.cpp
+    user-defined-component/plotter/plotter.cpp \
+    user-defined-component/mdiEditor/editor.cpp \
+    user-defined-component/mdiEditor/mdiwindow.cpp \
+    user-defined-component/timeTicker/ticker.cpp \
+    user-defined-component/ovenTimer/oventimer.cpp
 
 HEADERS  += \
     finddialog.h \
@@ -44,7 +48,11 @@ HEADERS  += \
     cell.h \
     user-defined-component/hexspinbox.h \
     user-defined-component/iconEditor/iconeditor.h \
-    user-defined-component/plotter/plotter.h
+    user-defined-component/plotter/plotter.h \
+    user-defined-component/mdiEditor/editor.h \
+    user-defined-component/mdiEditor/mdiwindow.h \
+    user-defined-component/timeTicker/ticker.h \
+    user-defined-component/ovenTimer/oventimer.h
 
 FORMS    += \
     gotocelldialog.ui \

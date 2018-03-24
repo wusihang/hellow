@@ -3,5 +3,6 @@
         <file>images/zoomin.jpg</file>
         <file>images/zoomout.jpg</file>
         <file>in1.txt</file>
+        <file>images/document.jpg</file>
     </qresource>
 </RCC>
