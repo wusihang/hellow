@@ -8,7 +8,9 @@ QT       += core gui
 QT       += uitools
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 QT       +=designer
-
+CONFIG   += c++11
+CONFIG   -= rtti_off
+CONFIG   += rtti
 TARGET = hellow
 TEMPLATE = app
 
@@ -37,7 +39,10 @@ SOURCES += main.cpp\
     user-defined-component/mdiEditor/editor.cpp \
     user-defined-component/mdiEditor/mdiwindow.cpp \
     user-defined-component/timeTicker/ticker.cpp \
-    user-defined-component/ovenTimer/oventimer.cpp
+    user-defined-component/ovenTimer/oventimer.cpp \
+    user-defined-component/diagram/link.cpp \
+    user-defined-component/diagram/node.cpp \
+    user-defined-component/diagram/diagram_window.cpp
 
 HEADERS  += \
     finddialog.h \
@@ -52,7 +57,10 @@ HEADERS  += \
     user-defined-component/mdiEditor/editor.h \
     user-defined-component/mdiEditor/mdiwindow.h \
     user-defined-component/timeTicker/ticker.h \
-    user-defined-component/ovenTimer/oventimer.h
+    user-defined-component/ovenTimer/oventimer.h \
+    user-defined-component/diagram/link.h \
+    user-defined-component/diagram/node.h \
+    user-defined-component/diagram/diagram_window.h
 
 FORMS    += \
     gotocelldialog.ui \

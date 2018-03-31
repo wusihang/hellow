@@ -11,6 +11,7 @@ OvenTimer::OvenTimer(QWidget *parent)
     :QWidget(parent){
     finishTime = QDateTime::currentDateTime();
     updateTimer = new QTimer(this);
+    //定时器的timeout信号触发后，ui该组件就刷新一次
     connect(updateTimer,SIGNAL(timeout()),this,SLOT(update()));
     finishTimer = new QTimer(this);
     finishTimer->setSingleShot(true);//只需要执行一次
@@ -26,7 +27,7 @@ void OvenTimer::setDuration(int secs){
     secs = qBound(0,secs,MaxSeconds);   //qBound函数，如果secs<0，设置为0，如果secs>MaxSeconds，设置为MaxSeconds
     finishTime = QDateTime::currentDateTime().addSecs(secs);  //得到结束时间
     if(secs>0){
-        updateTimer->start(UpdateInterval*1000);
+        updateTimer->start(UpdateInterval*1000); //更新周期设置为5s，每5s触发一次timeout信号
         finishTimer->start(secs*1000);
     }else{
         updateTimer->stop();
@@ -45,19 +46,34 @@ int OvenTimer::duration() const
 }
 
 void OvenTimer::mousePressEvent(QMouseEvent *event){
-    QPointF point = event->pos() - rect().center();
-    double theta = std::atan2(-point.x(),-point.y())*180.0 / M_PI;
-    setDuration(duration() + int(theta / DegreesPerSecond));
-    update();
+    QPointF point = event->pos() - rect().center(); //获得鼠标点击点和组件中点之间的向量
+    double theta = std::atan2(-point.x(),-point.y())*180.0 / M_PI; //计算夹角
+    setDuration(duration() + int(theta / DegreesPerSecond));  //设置定时器，并更新UI
 }
 
 void OvenTimer::paintEvent(QPaintEvent* /*event*/){
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing,true); //反走样
+    //直接绘制
+//    QPainter painter(this);
+//    painter.setRenderHint(QPainter::Antialiasing,true); //反走样
+//    int side = qMin(width(),height());
+//    painter.setViewport((width()-side)/2,(height()-side)/2,side,side);
+//    painter.setWindow(-50,-50,100,100);
+//    draw(&painter);
+    //先绘制image，再贴图
+    QImage image(size(),QImage::Format_ARGB32_Premultiplied);
+    QPainter imagePainter(&image);
     int side = qMin(width(),height());
-    painter.setViewport((width()-side)/2,(height()-side)/2,side,side);
-    painter.setWindow(-50,-50,100,100);
-    draw(&painter);
+    imagePainter.setViewport((width()-side)/2,(height()-side)/2,side,side);  //视口为最大正方形
+    imagePainter.setWindow(-50,-50,100,100);  //窗口为-50,-50  ~~   +50,+50
+    imagePainter.initFrom(this);
+    imagePainter.setRenderHint(QPainter::Antialiasing,true);
+    imagePainter.eraseRect(rect());
+    draw(&imagePainter);
+    imagePainter.end();
+
+    //最后将image贴到widget上
+    QPainter widgetPainter(this);
+    widgetPainter.drawImage(0,0,image);
 }
 
 void OvenTimer::draw(QPainter* painter){

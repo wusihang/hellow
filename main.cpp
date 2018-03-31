@@ -5,6 +5,7 @@
 #include "user-defined-component/timeTicker/ticker.h"
 #include "user-defined-component/ovenTimer/oventimer.h"
 #include "mainwindow.h"
+#include "user-defined-component/diagram/diagram_window.h"
 
 void readFlightCurves(Plotter *plotter, const QString &fileName)
 {
@@ -110,7 +111,16 @@ int ovenTimer(int argc, char* argv[]){
     return app.exec();
 }
 
+int diagramWindow(int argc, char* argv[]){
+    QApplication app(argc, argv);
+    DiagramWindow window;
+    window.show();
+    return app.exec();
+}
+
+
+
 int main(int argc, char *argv[])
 {
-    return ovenTimer(argc,argv);
+    return diagramWindow(argc,argv);
 }
